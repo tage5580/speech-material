@@ -1,0 +1,31 @@
+/******************************************************************************/
+/*               Define File for the prompt messages in CONVERT.C             */
+/******************************************************************************/
+
+#define error1 "\nInsufficient memory available\n"
+#define error2 "\nCan't open source file: %s\n"
+#define error3 "\nCan't create new speech file: %s\n"
+#define error4 "\nCan't skip over file header of: %s\n"
+#define error5 "\nCan't open text file: %s\n"
+#define error6 "\nCan't create label file: %s\n"
+#define error8 "\nCan't open command file: %s\n"
+
+#define msg1 "\nCorpus code for converted speech files (2 positions) ? "
+#define msg2 "\nNumber for the first converted file (4 positions) ? "
+#define msg3 "\nComplete path for speaker directory ? "
+#define msg4 "\nCONVERT (source file name) : "
+#define msg5 "\nCONVERT (whole source file specification) : "
+#define msg6 "\nTO (whole destination file specification) : "
+#define msg7 "\nFiles %s and %s have been produced\n"
+#define msg8 "\nConvert another Y/N  ?  "
+#define msg9 "\nPath for destination files ? "
+#define msg10 "\nIs the CD-ROM disc on line ?  Y/N  "
+#define msg11 "\nCAUTION !! As some information is on the CD-ROM disc, the label\
+ file produced will be minimal (with a number of empty fields)."
+#define msg12 "\nCD-ROM disc drive name ?  "
+#define msg15 "\nComplete path for the speakers file ? "
+#define msg16 "\nComplete path for prompts text file ? "
+#define msg17 "\nWhat is the name of your command file ?  "
+#define msg18 "\n ...Working..."
+#define msg19 "\nComplete path for the speakers code mapping file ? "
+#define msg20 "\nDatabase production date (year) ? "

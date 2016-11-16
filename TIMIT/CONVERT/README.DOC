@@ -1,0 +1,172 @@
+***************************************************************************
+                            C O N V E R T  (v 1.2)
+
+This software is intended to convert the DARPA TIMIT CD-ROM (CD 1-1.1)
+Continuous Speech Database files into the European Multi-lingual Speech
+input/output Assessment Methodology and Standardization (SAM) speech database
+format.  
+
+It was made in cooperation with the National Institute of Standards and
+Technology (NIST) (U.S.A) and the E.E.C. European Strategic Project on
+Information Technology (ESPRIT) Project No. 2589 (SAM). Implementation was
+carried out at the Institut de la Communication Parl‚e, Grenoble, France. 
+(Some minor revisions were made at NIST to the original SAM source code so that
+the software would work with the TIMIT CD-ROM file structure.)
+
+The NIST TIMIT speech file format is composed of a header which is 1024-byte
+long, followed by the sampled speech.  The header contains information
+about the file production.  Some of this information is used by the CONVERT
+software.
+
+An example of the DARPA TIMIT CD-ROM filenaming convention is:
+
+                       \TIMIT\TRAIN\DR1\FCJF0\SA1.WAV
+        
+
+
+
+                    where     TIMIT: is the database identifier
+                              TRAIN: is the usage directory
+                                DR1: is the dialect region directory
+                              FCJF0: is the sex/speaker identifier directory
+                            SA1.WAV: is speech waveform file for the sentence-
+                                     text, "sa1"
+                 
+                          with CJF0: speaker code (4 positions)
+                                  1: dialect region code
+                                SA1: sentence code
+                                WAV: means WAVeform
+
+
+The SAM speech file format consists only of sampled speech.  However, a label
+file containing relevant information is associated with every speech file. 
+The SAM naming convention is:
+
+                           XXnnxxxx.SAS   <->   XXnnxxxx.SAO
+        
+                    where  XXnnxxxx.SAS: is the speech waveform file
+                    and    XXnnxxxx.SAO: is the associated label file
+
+                    with       XX: speaker code (2 positions)
+                               nn: corpus code (2 positions)
+                             xxxx: unique file number (4 positions)
+                                S: means Sentence
+                                A: means American
+                                S: means Sampled speech
+                                O: means Orthographic time-aligned labelling
+
+
+A mapping file has been included by NIST on the present CD-ROM, to be used
+when the CD-ROM is on line and when the filename conversion is automatic
+(i.e., with the command file).  [The use of this mapping file ensures that
+a unique speaker code is generated for each speaker.]
+
+        SPKR_MAP.SAM: contains a conversion map which assigns a unique "SAM"
+                      code to each (American) speaker in the DARPA TIMIT/
+                      Resource Management corpus.  This code is used in the 
+                      SAM filename produced as XX. [This file is found in
+                      \CONVERT\]
+
+        The two first letters of the original filename are used as the
+        (corpus code) in the filename that is produced:   SA1 --> SA
+
+
+Each recording lab in the SAM project is allocated a batch of codes or
+numbers to ensure the nnxxxx field specifies a unique recorded file for each
+language [laboratory].
+
+NOTE: ONE DARPA TIMIT file will be converted into TWO associated SAM files, 
+(i.e., one ".WAV" file will be converted into one "SAS" and one "SAO" file).  
+
+The user is asked to first give the CD-ROM drive letter, the speaker
+information file specification [\TIMIT\DOC\SPKRINFO.TXT] and text prompts file
+specification [this should be left blank so that the program uses the 
+transcriptions instead of the prompts], in order to ensure that information
+can be read from the CD-ROM disc when present.  The CD-ROM making date
+will calculate the speakers' ages (at the time of recording) from the speaker 
+information file [this should also be blank because the speaker age will be 
+calculated automatically from the "SPKRINFO.TXT" file]
+
+
+
+How to run CONVERT:
+------------------
+        Convert can be invoked two ways:
+
+         (1)    > convert
+
+         (2)    > convert myfile      (where "myfile" is the name of the
+                                       command file)
+
+
+(1) In this case, the user has to answer some questions and, in particular,
+to give, each time he wants to convert another file, its full name and
+pathname. This method is useful for a single conversion.
+
+(2) The files listed in the command file are converted according to the SAM
+filenaming convention.
+
+If the CD-ROM is present, the speaker code is read from the [\TIMIT\DOC]
+SPKR_MAP.SAM file (conversion map).
+
+If the CD_ROM is not present, the user will be asked to specify a speaker
+mapping file.  The speaker code will either be derived from the mapping file
+(if specified), or will be composed of the two first letters of the American
+speaker code [which will not necessarily produce a unique speaker code].
+
+The speaker is always asked for the number of the file first produced by
+CONVERT.  Then the file number will be incremented before every new
+conversion.
+
+This method is useful for converting batches of files.
+
+In both cases, the CD-ROM disc may be present or not.  If it is, more
+information can be read, and the associated label file that is produced will
+be more complete, (particularly the sentence text prompt and the speaker
+information).
+
+How to write a command file:
+---------------------------
+A command file is easily written using a text editor according to the
+following rules:
+
+     - one filename per line
+
+          <FILENAME><NEW-LINE>
+       or <PATHNAME>\<FILENAME><NEW-LINE>
+
+     - the pathname is valid until a new one is set.
+
+
+    Example command files
+    ---------------------
+
+    Example 1:
+
+        SA1.WAV
+        SA2.WAV
+        SX100.WAV
+        
+        ----> These three files (in the current directory) will be converted.
+
+        --------------
+
+     Example 2:
+
+        K:\TIMIT\TRAIN\DR5\MJPG0\SA1.WAV
+        SI1191.WAV
+        SX291.WAV
+        K:\TIMIT\TEST\DR1\FAKS0\SI2203.WAV
+        
+
+        ----> The first three files (in the CD-ROM directory 
+        \TIMIT\TRAIN\DR5\MJPG0 will be converted followed by the file in the  
+        \TIMIT\TEST\DR1\FAKS0 directory. [K signifies the CD-ROM disc drive 
+        letter]
+
+
+    Technical questions: Please contact Je‚o“me Zeiliger   Tel: +33 76574538
+                                        I.C.P. - FRANCE   Fax: +33 76574710
+
+***************************************************************************
+
